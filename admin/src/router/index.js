@@ -5,9 +5,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const Login = () => import('../components/login');
-const Menu = () => import('../components/menu');
 const Index = () => import('../components/index');
-
 export default new Router({
   routes: [
     {
@@ -21,9 +19,12 @@ export default new Router({
       component:Index
     },
     {
-      path:'/menu',
-      name:'menu',
-      component:Menu
+      path:'/goback',
+      redirect:"/",
+    },
+    {
+      path:'/a',
+      redirect:'/index'
     }
   ]
 })

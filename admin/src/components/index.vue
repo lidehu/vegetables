@@ -1,6 +1,6 @@
 <template>
     <div @click="goIndex()">
-      {{msg}}
+      {{msg}}1
     </div>
 </template>
 
@@ -9,7 +9,7 @@
         name: "Index",
         data (){
           return {
-            msg:""
+            msg:"werwerwer"
           }
         },
         mounted(){
@@ -20,6 +20,7 @@
             this.$router.push({path:'/'})
           },
           getRouterInfo(){
+            console.log(this.$route);
             switch (parseInt(this.$route.query.id)) {
               case 1:
                 this.msg="李德华"
