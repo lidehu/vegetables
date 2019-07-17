@@ -1,6 +1,7 @@
 <template>
-    <div @click="goIndex()">
-      {{msg}}1
+    <div >
+      <li @click="goIndex()"> {{msg}}1</li>
+      <li @click="loginOut()"> 222222</li>
     </div>
 </template>
 
@@ -17,10 +18,14 @@
         },
         methods:{
           goIndex(){
+            this.$router.push({path:'/b'})
+          },
+          loginOut(){
+            localStorage.removeItem('userInfo')
+            this.$store.commit("removeUserInfo")
             this.$router.push({path:'/'})
           },
           getRouterInfo(){
-            console.log(this.$route);
             switch (parseInt(this.$route.query.id)) {
               case 1:
                 this.msg="李德华"

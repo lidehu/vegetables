@@ -7,7 +7,7 @@
           <el-input placeholder="账户" class="user" v-model="loginForm.username" autofocus="true"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input type="password" @keyup.enter.native="" class="psd" placeholder="密码"  v-model="loginForm.password"></el-input>
+          <el-input type="password" @keyup.enter.native="submitForm" class="psd" placeholder="密码"  v-model="loginForm.password"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm">立即登录</el-button>
@@ -19,8 +19,9 @@
 
 <script>
 import {mapState,mapGetters,mapMutations} from 'vuex'
+import api from '../../api'
 export default {
-  name: 'Login',
+  name: 'login',
   data () {
     return {
       loginForm:{
@@ -30,7 +31,7 @@ export default {
     };
   },
   created(){
-
+   console.log(11111)
   },
   computed:{
 
@@ -44,19 +45,30 @@ export default {
         this.$message.error('密码不能为空');
         return false;
       }else{
-        this.$message({
-          message: '登录成功',
-          type: 'success'
-        });
+
         return true
       }
     },
     submitForm(){
        if(this.testEmpty()){
-         this.$router.push({path:'/index'})
+         api.login(this.loginForm).then(res=>{
+           this.$message({
+             message: '登录成功',
+             type: 'success'
+           });
+           let userInfo=res.result;
+            this.$store.commit('getUserInfo',userInfo)
+           localStorage.userInfo=JSON.stringify(userInfo)
+           this.$router.push({path:'/index'})
+         }).catch(
+           err=>{
+             console.log(err);
+           }
+         )
+
        }
     }
-  }
+  },
 }
 </script>
 
@@ -87,7 +99,7 @@ export default {
     position: absolute;
     width: 20px;
     height: 20px;
-    background: url("../assets/img/login_icon_user.png") no-repeat;
+    background: url("../../assets/img/login_icon_user.png") no-repeat;
     background-size:cover;
     top:50%;
     margin-top:-12px;
@@ -98,7 +110,7 @@ export default {
     position: absolute;
     width: 20px;
     height: 20px;
-    background: url("../assets/img/login_icon_password.png") no-repeat;
+    background: url("../../assets/img/login_icon_password.png") no-repeat;
     background-size:cover;
     top:50%;
     margin-top:-12px;
@@ -124,6 +136,7 @@ export default {
   .name{
     line-height: 150px;
     color: #fff;
+    font-size: 24px;
     text-align: center;
   }
 </style>

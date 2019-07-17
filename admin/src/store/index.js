@@ -7,7 +7,8 @@ Vue.use(Vuex);
 const state = {
   token:'',
   count:0,
-  number:1
+  number:1,
+  userInfo:localStorage.userInfo||null
 }
 
 const getter = {
@@ -16,6 +17,12 @@ const getter = {
 }
 
 const mutations = {
+  getUserInfo(state,val){
+    state.userInfo = val
+  },
+  removeUserInfo(state){
+    state.userInfo = null
+  },
   countAdd(state,val){
     console.log(val);
     if(val == 60){

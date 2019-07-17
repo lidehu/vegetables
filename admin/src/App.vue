@@ -6,11 +6,14 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created() {
+    this.$store.state.userInfo?this.$router.push('/index'):this.$router.push('/login')
+  }
 }
 </script>
-
 <style>
+  @import url('./assets/css/base.css');
   html,body,#app{
     padding: 0;
     margin:0;

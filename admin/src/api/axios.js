@@ -5,7 +5,10 @@ import store from '../store'
 const service = axios.create({
   timeout:5000,
   withCredentials: true,
-  headers:{'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'}
+  headers:{	'content-type': 'multipart/form-data;boundary=---------------------------7d33a816d302b6',
+    //'content-type': 'application/x-www-form-urlencoded',
+    'content-type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest'}
 })
 
 service.defaults.baseURL="http://smtb.onccc.com";
@@ -22,7 +25,7 @@ service.interceptors.request.use(config =>{
 
 //响应拦截
 service.interceptors.response.use(res => {
-    if(res.code === 200){
+    if(res.status == 200){
       return Promise.resolve(res);
     }else{
       //这个地方可以由后台编辑状态码区分不同情况，做不同的逻辑处理
@@ -30,16 +33,11 @@ service.interceptors.response.use(res => {
     }
   },
   error => {
-    // //请求失败，这个地方可以根据error.response.status统一处理一些界面逻辑，比如status为401未登录,可以进行重定向
-    // router.replace({
-    //     path: '/login',
-    //     query: { redirect: router.currentRoute.fullPath }
-    //    });
     return Promise.reject(error);
   })
 
 //对外请求
-function request({method, url, params}){
+function request(method, url, params){
   if(method == 'get'){
     return get(url, params);
   }else if(method == 'post'){
@@ -62,9 +60,9 @@ function get(url, params){
 // 封装post方法
 function post(url, params){
   return new Promise((resolve, reject) =>{
-    service.post(url, QS.stringify(params)).then(res =>{
+    service.post(url, params).then(res =>{
       resolve(res.data);
-    }).catch(err =>{
+    }).catch(error =>{
       reject(error.data);
     })
 
