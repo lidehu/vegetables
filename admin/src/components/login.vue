@@ -4,7 +4,7 @@
       <h1 class="name">智慧商城管理平台</h1>
       <el-form :model="loginForm">
         <el-form-item>
-          <el-input placeholder="账户" class="user" v-model="loginForm.username"></el-input>
+          <el-input placeholder="账户" class="user" v-model="loginForm.username" autofocus="true"></el-input>
         </el-form-item>
         <el-form-item>
           <el-input type="password" @keyup.enter.native="" class="psd" placeholder="密码"  v-model="loginForm.password"></el-input>

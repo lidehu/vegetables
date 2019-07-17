@@ -8,7 +8,7 @@ const service = axios.create({
   headers:{'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'}
 })
 
-// service.defaults.baseURL='';
+service.defaults.baseURL="http://smtb.onccc.com";
 
 //设置请求头
 service.interceptors.request.use(config =>{
