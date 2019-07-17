@@ -5,9 +5,7 @@ import store from '../store'
 const service = axios.create({
   timeout:5000,
   withCredentials: true,
-  headers:{	'content-type': 'multipart/form-data;boundary=---------------------------7d33a816d302b6',
-    //'content-type': 'application/x-www-form-urlencoded',
-    'content-type': 'application/json',
+  headers:{'content-type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'}
 })
 
@@ -22,10 +20,11 @@ service.interceptors.request.use(config =>{
 }, error =>{
   return Promise.reject(error)
 });
-
+// 13812345678
 //响应拦截
 service.interceptors.response.use(res => {
-    if(res.status == 200){
+    console.log(res.data);
+    if(res.data.code == "0"){
       return Promise.resolve(res);
     }else{
       //这个地方可以由后台编辑状态码区分不同情况，做不同的逻辑处理

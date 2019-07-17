@@ -18,19 +18,13 @@ new Vue({
   template: '<App/>'
 })
 router.beforeEach((to,from,next)=>{
-  console.log(to.path,localStorage.userInfo);
-  if(to.path !== '/login'&& localStorage.userInfo == null){
+  if(to.path !== '/login'&& !store.state.login){
     next({path:'/login'})
   }else if(to.path == '/'){
     next({path:'/'})
   }else{
     next()
   }
-   // if(to.meta.login){
-   //   next({path:"/login"})
-   // }else{
-   //   next()
-   // }
 })
 router.afterEach(route => {
   window.scroll(0, 0);

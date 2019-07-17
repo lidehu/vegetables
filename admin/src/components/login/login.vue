@@ -27,7 +27,8 @@ export default {
       loginForm:{
         username:'',
         password:''
-      }
+      },
+      submitFlag:true
     };
   },
   created(){
@@ -50,19 +51,25 @@ export default {
       }
     },
     submitForm(){
-       if(this.testEmpty()){
+       if(this.testEmpty() && this.submitFlag){
+         this.submitFlag=false
          api.login(this.loginForm).then(res=>{
            this.$message({
              message: '登录成功',
              type: 'success'
            });
-           let userInfo=res.result;
+           let username=res.result.username,roleIds=res.result.roleIds,roleNames=res.result.roleNames,login=true;
+           let userInfo={username,roleIds,roleNames,login};
+           localStorage.userInfo=JSON.stringify(userInfo);
             this.$store.commit('getUserInfo',userInfo)
-           localStorage.userInfo=JSON.stringify(userInfo)
+
            this.$router.push({path:'/index'})
+           this.submitFlag=true
          }).catch(
            err=>{
-             console.log(err);
+             this.submitFlag=true
+             this.$message.error(err.description)
+             localStorage.userInfo=null
            }
          )
 

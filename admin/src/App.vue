@@ -8,7 +8,7 @@
 export default {
   name: 'App',
   created() {
-    this.$store.state.userInfo?this.$router.push('/index'):this.$router.push('/login')
+    this.$store.state.login?this.$router.push('/index'):this.$router.push('/login')
   }
 }
 </script>

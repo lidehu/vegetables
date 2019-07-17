@@ -39,7 +39,7 @@
      margin-top: 120px;
    }
    p{
-     width: 60%;
+     width: 80%;
      line-height: 24px;
      margin-bottom: 20px;
    }
@@ -51,6 +51,6 @@
      border-radius:20px;
      text-align: center;
      color: #ffffff;
-
+     margin-left:60px;
    }
 </style>
