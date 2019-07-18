@@ -19,6 +19,7 @@ new Vue({
 })
 router.beforeEach((to,from,next)=>{
   if(to.path !== '/login'&& !store.state.login){
+    ElementUI.Message("请先登录")
     next({path:'/login'})
   }else if(to.path == '/'){
     next({path:'/'})

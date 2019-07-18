@@ -3,14 +3,14 @@ import Vuex from 'vuex'
 
 
 Vue.use(Vuex);
-const login = JSON.parse(localStorage.userInfo).login || false;
-console.log(login,3333);
+const login = localStorage.login ? localStorage.login : false;
+const userInfo = localStorage.userInfo ? JSON.parse(localStorage.userInfo):null;
 const state = {
   token:'',
   count:0,
   number:1,
   login,
-  userInfo:localStorage.userInfo||null
+  userInfo
 }
 
 const getter = {
@@ -20,19 +20,12 @@ const getter = {
 
 const mutations = {
   getUserInfo(state,val){
-    state.userInfo = val
-    state.login=val.login
+    state.userInfo = val.userInfo
+    state.login = val.login
   },
   removeUserInfo(state){
-    state.userInfo = null
-  },
-  countAdd(state,val){
-    console.log(val);
-    if(val == 60){
-      state.count=50
-    }
-    state.count++;
-    state.count=state.count>10?val:state.count
+    state.userInfo = null,
+    state.login = false
   }
 }
 

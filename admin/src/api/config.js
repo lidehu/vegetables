@@ -23,7 +23,7 @@ service.interceptors.request.use(config =>{
 // 13812345678
 //响应拦截
 service.interceptors.response.use(res => {
-    console.log(res.data);
+    console.log(res.data.code);
     if(res.data.code == "0"){
       return Promise.resolve(res);
     }else{
@@ -41,6 +41,8 @@ function request(method, url, params){
     return get(url, params);
   }else if(method == 'post'){
     return post(url, params);
+  }else if (method == 'put') {
+    return put(url, params)
   }
 }
 
@@ -55,7 +57,16 @@ function get(url, params){
   });
 
 }
-
+function put() {
+  return new Promise((resolve, reject) => {
+    service.put(url, params)
+      .then(response => {
+        resolve(response);
+      }).catch((error) => {
+      reject(error);
+    });
+  })
+}
 // 封装post方法
 function post(url, params){
   return new Promise((resolve, reject) =>{

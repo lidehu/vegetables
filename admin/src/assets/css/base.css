@@ -51,7 +51,9 @@ a{
   -webkit-backface-visibility: hidden;
   text-decoration: none;
 }
-
+img{
+  width: 100%;
+}
 li{
   list-style: none;
 }

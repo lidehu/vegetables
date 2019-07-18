@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import {mapState,mapGetters,mapMutations} from 'vuex'
 import api from '../../api'
 export default {
   name: 'login',
@@ -32,7 +31,6 @@ export default {
     };
   },
   created(){
-   console.log(11111)
   },
   computed:{
 
@@ -46,7 +44,6 @@ export default {
         this.$message.error('密码不能为空');
         return false;
       }else{
-
         return true
       }
     },
@@ -58,11 +55,10 @@ export default {
              message: '登录成功',
              type: 'success'
            });
-           let username=res.result.username,roleIds=res.result.roleIds,roleNames=res.result.roleNames,login=true;
-           let userInfo={username,roleIds,roleNames,login};
+           let userInfo=res.result,login=true;
            localStorage.userInfo=JSON.stringify(userInfo);
-            this.$store.commit('getUserInfo',userInfo)
-
+           localStorage.login=login;
+           this.$store.commit('getUserInfo',{userInfo,login})
            this.$router.push({path:'/index'})
            this.submitFlag=true
          }).catch(

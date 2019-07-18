@@ -14,6 +14,7 @@ export default {
 </script>
 <style>
   @import url('./assets/css/base.css');
+  @import url('./assets/css/icon.css');
   html,body,#app{
     padding: 0;
     margin:0;
