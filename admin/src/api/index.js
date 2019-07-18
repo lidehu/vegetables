@@ -14,6 +14,7 @@ export default {
    * @returns
    */
   password(params) {
+    console.log("lo");
     return axios('put','/meterweb/web/modify/password', params)
   },
 }

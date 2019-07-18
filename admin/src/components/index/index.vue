@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside width="220px"><div class="log-container"><img src="../../assets/img/index/avatar.jpg" alt=""><p>华仔ADMIN</p></div></el-aside>
+    <el-aside width="220px"><div class="log-container"><img src="../../assets/img/index/avatar.jpg" alt=""><span>华仔admin</span></div></el-aside>
     <el-container>
       <el-header>
         <el-dropdown trigger="click" @command="handleMenu" placement="bottom" >

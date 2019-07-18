@@ -65,18 +65,24 @@
       methods: {
         submitForm(formName) {
           // 验证通过返回布尔值
-          var vResult=this.$refs[formName].validate((valid) => {
-             return valid
-          });
-          if(vResult){
-            var params={
-              id:this.$store.state.userInfo.id,
-              oldPassword:this.$store.state.userInfo,
-              newPassword:this.data.checkPass
+          console.log(1111);
+          this.$refs[formName].validate((valid) => {
+            if(valid){
+              var params={
+                id:this.$store.state.userInfo.id,
+                oldPassword:"123456",
+                newPassword:this.ruleForm2.checkPass
+              }
+              api.password(params).then(res=>{
+                console.log(res);
+              }).catch(err=>{
+                console.log(err);
+                this.$message(err.description)
+              })
+              this.$emit('handleClose')
             }
-            api.password(params)
-            this.$emit('handleClose')
-          }
+          });
+
         },
         resetForm(formName) {
           this.$refs[formName].resetFields();

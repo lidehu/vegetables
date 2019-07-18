@@ -10,7 +10,7 @@ const state = {
   count:0,
   number:1,
   login,
-  userInfo
+  userInfo,
 }
 
 const getter = {

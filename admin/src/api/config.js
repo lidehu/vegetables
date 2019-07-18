@@ -42,6 +42,7 @@ function request(method, url, params){
   }else if(method == 'post'){
     return post(url, params);
   }else if (method == 'put') {
+    console.log('222');
     return put(url, params)
   }
 }
@@ -57,13 +58,17 @@ function get(url, params){
   });
 
 }
-function put() {
+function put(url, params) {
+  console.log("put");
   return new Promise((resolve, reject) => {
+    console.log('ppp');
     service.put(url, params)
-      .then(response => {
-        resolve(response);
+      .then(res=> {
+        console.log(res,11111111111111111111);
+        resolve(res.data);
       }).catch((error) => {
-      reject(error);
+      console.log(error,2222222222222);
+      reject(error.data);
     });
   })
 }
